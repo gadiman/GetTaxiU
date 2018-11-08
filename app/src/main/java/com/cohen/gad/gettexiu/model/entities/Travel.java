@@ -4,8 +4,10 @@ import java.sql.Time;
 
 public class Travel {
 
-    //---------------------------------- Field ------------------------------------------//
-    public enum TRAVEL {AVAILABLE,OCCUPIED,FINISHED}
+    public enum TRAVEL_STATUS {AVAILABLE,OCCUPIED,FINISHED}
+
+    //---------------------------------- Fields ------------------------------------------//
+    private TRAVEL_STATUS travel_status;
     private String startLocation;
     private String endLocation;
     private Time startTravelTime;
@@ -87,14 +89,12 @@ public class Travel {
         this.customerEmailAddress = customerEmailAdress;
     }
 
+    public TRAVEL_STATUS getTravel_status() {
+        return travel_status;
+    }
 
-
-
-
-
-
-
-
-
+    public void setTravel_status(TRAVEL_STATUS travel_status) {
+        this.travel_status = travel_status;
+    }
 
 }
