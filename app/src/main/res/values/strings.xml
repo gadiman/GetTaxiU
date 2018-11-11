@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">GetTexiU</string>
+    <string name="name">Name</string>
+    <string name="Enter_name">Enter your private name</string>
+    <string name="phone">Phone number:</string>
+    <string name="Enter_phone">Enter your phone number</string>
+    <string name="Id">ID:</string>
+    <string name="Enter_id">Enter your id</string>
 </resources>

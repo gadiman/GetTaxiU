@@ -26,7 +26,7 @@ public class TravelConst {
 
         //------------------------------- Functions -------------------------------//
 
-        //Function that make casting from Travel object to ContentValues object
+    //Function that make casting from Travel object to ContentValues object
         public static ContentValues TravelToContentValues(Travel travel) {
 
             ContentValues contentValues = new ContentValues();
