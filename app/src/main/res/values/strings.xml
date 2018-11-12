@@ -4,6 +4,17 @@
     <string name="Enter_name">Enter your private name</string>
     <string name="phone">Phone number:</string>
     <string name="Enter_phone">Enter your phone number</string>
-    <string name="Id">ID:</string>
-    <string name="Enter_id">Enter your id</string>
+    <string name="Email">Email:</string>
+    <string name="Enter_email">Enter your email</string>
+    <string name="Initial_location">Initial location:</string>
+    <string name="Enter_Initial_location">Enter initial location</string>
+    <string name="Destination">Destination:</string>
+    <string name="Enter_destination">Enter destination</string>
+    <string name="Beginning_time">Beginning time:</string>
+    <string name="Leaving_time">Leaving time:</string>
+    <string name="Enter_leaving_time">Enter leaving time:</string>
+    <string name="Arrival_time">Arrival time:</string>
+    <string name="Enter_Arrival_time">Enter arrival time</string>
+    <string name="country_prompt">Choose travel status</string>
+    <string name="Status">Status of travel:</string>
 </resources>

@@ -6,6 +6,26 @@
     android:layout_height="match_parent"
     tools:context=".controller.MainActivity">
 
+    <TableRow android:id="@+id/Spinner_row"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        >
+
+        <TextView
+            android:layout_column="0"
+            android:text="@string/Status"
+            android:layout_margin="10dp"
+            />
+
+    <Spinner android:id="@+id/spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_column="1"
+        android:layout_margin="10dp"
+        android:layout_gravity="center"
+        android:prompt="@string/country_prompt"/>
+    </TableRow>
 
     <TableRow
         android:id="@+id/row_1"
@@ -49,6 +69,8 @@
             />
     </TableRow>
 
+
+
     <TableRow
         android:id="@+id/row_3"
         android:layout_width="fill_parent"
@@ -56,7 +78,7 @@
 
         <TextView
             android:layout_column="0"
-            android:text="@string/Id"
+            android:text="@string/Email"
             android:layout_margin="10dp"
             />
 
@@ -64,7 +86,91 @@
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_column="1"
-            android:hint="@string/Enter_id"
+            android:hint="@string/Enter_email"
+            android:textAlignment="center"
+
+            />
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/row_4"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_column="0"
+            android:text="@string/Initial_location"
+            android:layout_margin="10dp"
+            />
+
+        <EditText
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_column="1"
+            android:hint="@string/Enter_Initial_location"
+            android:textAlignment="center"
+
+            />
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/row_5"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_column="0"
+            android:text="@string/Destination"
+            android:layout_margin="10dp"
+            />
+
+        <EditText
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_column="1"
+            android:hint="@string/Enter_destination"
+            android:textAlignment="center"
+
+            />
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/row_6"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_column="0"
+            android:text="@string/Leaving_time"
+            android:layout_margin="10dp"
+            />
+
+        <EditText
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_column="1"
+            android:hint="@string/Enter_leaving_time"
+            android:textAlignment="center"
+
+            />
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/row_7"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_column="0"
+            android:text="@string/Arrival_time"
+            android:layout_margin="10dp"
+            />
+
+        <EditText
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_column="1"
+            android:hint="@string/Enter_Arrival_time"
             android:textAlignment="center"
 
             />
