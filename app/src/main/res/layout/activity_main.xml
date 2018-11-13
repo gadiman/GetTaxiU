@@ -1,19 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TableLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     tools:context=".controller.MainActivity">
 
-    <TableRow android:id="@+id/Spinner_row"
+    <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="10dp"
-        >
+        android:orientation="horizontal"
+        android:layout_marginBottom="10dp"
+        android:gravity="center">
 
         <TextView
+            android:id="@+id/StatusOfTravelLabel"
             android:layout_column="0"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
             android:text="@string/Status"
             android:layout_margin="10dp"
             />
@@ -25,160 +31,143 @@
         android:layout_margin="10dp"
         android:layout_gravity="center"
         android:prompt="@string/country_prompt"/>
-    </TableRow>
 
-    <TableRow
-        android:id="@+id/row_1"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
+    </LinearLayout>
 
         <TextView
-            android:layout_column="0"
+            android:id="@+id/NameTextLabel"
             android:text="@string/name"
-            android:layout_margin="10dp"
-            />
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content" />
 
         <EditText
-            android:layout_width="250dp"
+            android:id="@+id/NameTextInput"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
             android:layout_height="wrap_content"
-            android:layout_column="1"
+            android:textSize="10dp"
+            android:layout_marginBottom="10dp"
             android:hint="@string/Enter_name"
             android:textAlignment="center"
+           />
 
-            />
-    </TableRow>
 
-    <TableRow
-        android:id="@+id/row_2"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:layout_column="0"
-            android:text="@string/phone"
-            android:layout_margin="10dp"
-            />
-
-        <EditText
-            android:layout_width="250dp"
+    <TextView
+            android:id="@+id/EmailTextLabel"
             android:layout_height="wrap_content"
-            android:layout_column="1"
-            android:hint="@string/Enter_phone"
-            android:textAlignment="center"
-
-            />
-    </TableRow>
-
-
-
-    <TableRow
-        android:id="@+id/row_3"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:layout_column="0"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
             android:text="@string/Email"
-            android:layout_margin="10dp"
             />
 
         <EditText
+            android:id="@+id/EmailTextInput"
             android:layout_width="250dp"
+            android:textSize="10dp"
+            android:layout_gravity="center"
             android:layout_height="wrap_content"
-            android:layout_column="1"
             android:hint="@string/Enter_email"
+            android:layout_marginBottom="10dp"
             android:textAlignment="center"
 
             />
-    </TableRow>
-
-    <TableRow
-        android:id="@+id/row_4"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
 
         <TextView
-            android:layout_column="0"
+            android:id="@+id/InitialLocationTextLabel"
             android:text="@string/Initial_location"
-            android:layout_margin="10dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
             />
 
         <EditText
+            android:id="@+id/InitialLocationTextInput"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:layout_column="1"
             android:hint="@string/Enter_Initial_location"
+            android:layout_gravity="center"
+            android:textSize="10dp"
+            android:layout_marginBottom="10dp"
             android:textAlignment="center"
 
             />
-    </TableRow>
-
-    <TableRow
-        android:id="@+id/row_5"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
 
         <TextView
-            android:layout_column="0"
+            android:id="@+id/DestinationTextlabel"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
             android:text="@string/Destination"
-            android:layout_margin="10dp"
+            android:layout_gravity="center"
             />
 
         <EditText
+            android:id="@+id/DestinationTextInput"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:layout_column="1"
             android:hint="@string/Enter_destination"
+            android:textSize="10dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="10dp"
+
             android:textAlignment="center"
 
             />
-    </TableRow>
 
-    <TableRow
-        android:id="@+id/row_6"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
 
-        <TextView
-            android:layout_column="0"
-            android:text="@string/Leaving_time"
-            android:layout_margin="10dp"
-            />
+    <TextView
+        android:id="@+id/LeavingTimeTextLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/Leaving_time" />
 
         <EditText
+            android:id="@+id/LeavingTimeTextInput"
+            android:layout_gravity="center"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:layout_column="1"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:textSize="10dp"
+            android:layout_marginBottom="10dp"
             android:hint="@string/Enter_leaving_time"
-            android:textAlignment="center"
+            android:textAlignment="center" />
 
-            />
-    </TableRow>
-
-    <TableRow
-        android:id="@+id/row_7"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
 
         <TextView
-            android:layout_column="0"
+            android:id="@+id/ArrivalTimeTextLabel"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
             android:text="@string/Arrival_time"
-            android:layout_margin="10dp"
+            android:layout_gravity="center"
             />
 
         <EditText
+            android:id="@+id/ArrivalTimeTextInPut"
             android:layout_width="250dp"
+            android:layout_gravity="center"
             android:layout_height="wrap_content"
-            android:layout_column="1"
             android:hint="@string/Enter_Arrival_time"
+            android:textSize="10dp"
             android:textAlignment="center"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_marginBottom="10dp"
 
             />
-    </TableRow>
+
+
+
+    <Button
+    android:id="@+id/SubmitButton"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:text="@string/Button_Submit"/>
 
 
 
 
 
-
-</TableLayout>
+</LinearLayout>
