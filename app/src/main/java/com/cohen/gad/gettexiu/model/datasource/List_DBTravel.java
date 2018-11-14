@@ -29,4 +29,9 @@ public class List_DBTravel implements DB_manager {
         Travel travel_ = ContentValuesToTravel(travel);
         travels.add(travel_);
     }
+
+    @Override
+    public void removeTravel(ContentValues travel) {
+
+    }
 }

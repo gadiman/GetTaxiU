@@ -6,5 +6,5 @@ public interface DB_manager {
 
     //------------------------------- Functions -------------------------------//
     public void addNewTravel(ContentValues travel);
-
+    public void removeTravel(ContentValues travel);
 }

@@ -17,4 +17,5 @@
     <string name="Enter_Arrival_time">Enter arrival time</string>
     <string name="country_prompt">Choose travel status</string>
     <string name="Status">Status of travel:</string>
+    <string name="title_activity_screen">ScreenActivity</string>
 </resources>
