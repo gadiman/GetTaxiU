@@ -1,7 +1,9 @@
 package com.cohen.gad.gettexiu.controller;
 
 import android.app.TimePickerDialog;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -34,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     String amPm;
 
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private void findViews() {
         spinner = (Spinner)findViewById( R.id.spinner );
         NameTextInput = (EditText)findViewById( R.id.NameTextInput );
@@ -54,6 +58,9 @@ public class MainActivity extends AppCompatActivity {
         LeavingTimeTextInput = (EditText)findViewById( R.id.LeavingTimeTextInput );
         ArrivalTimeTextInPut = (EditText)findViewById( R.id.ArrivalTimeTextInPut );
         SubmitButton= (Button)findViewById(R.id.SubmitButton);
+
+        LeavingTimeTextInput.setShowSoftInputOnFocus(false);
+        ArrivalTimeTextInPut.setShowSoftInputOnFocus(false);
 
         //SubmitButton.setOnClickListener((View.OnClickListener) this);
         LeavingTimeTextInput.setOnClickListener(new View.OnClickListener() {

@@ -122,6 +122,8 @@
         android:layout_gravity="center"
         android:text="@string/Leaving_time" />
 
+
+
         <EditText
             android:id="@+id/LeavingTimeTextInput"
             android:layout_gravity="center"

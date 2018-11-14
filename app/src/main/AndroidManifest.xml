@@ -21,4 +21,6 @@
         <activity android:name=".controller.ScreenActivity"></activity>
     </application>
 
+
+
 </manifest>
