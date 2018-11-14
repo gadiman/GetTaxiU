@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ImageButton;
 
 import com.cohen.gad.gettexiu.R;
 
@@ -16,13 +16,12 @@ public class ScreenActivity extends Activity {
         setContentView(R.layout.activity_screen);
 
         final Intent nextIntent=new Intent( ScreenActivity.this, MainActivity.class);
-        final Button sendbutton = findViewById(R.id.sendButton);
+        final ImageButton sendbutton = findViewById(R.id.sendButton);
         sendbutton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
                 startActivity( nextIntent );
-
             }
         });
     }

@@ -18,29 +18,28 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Welcome to getTexi"
+            android:text="@string/Wellcome"
+            android:layout_marginBottom="39dp"
             android:textSize="40dp" />
 
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="15dp"
-            android:gravity="center"
-            android:text="Fill in your cell phone number"
-            android:textSize="30dp" />
 
         <EditText
             android:id="@+id/numberphon"
             android:layout_width="350dp"
             android:layout_height="60dp"
+            android:layout_marginTop="100dp"
+            android:hint="@string/Enter_phone"
             android:textAlignment="center"/>
 
-        <Button
+
+        <ImageButton
             android:id="@+id/sendButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:text="send"
-            android:layout_gravity="right"/>
+            android:layout_gravity="center"
+            android:src="@mipmap/ic_next"/>
 
     </LinearLayout>
 

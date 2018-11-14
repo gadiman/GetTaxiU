@@ -18,4 +18,6 @@
     <string name="country_prompt">Choose travel status</string>
     <string name="Status">Status of travel:</string>
     <string name="Button_Submit">Submit</string>
+    <string name="Wellcome">Welcome to getTexi</string>
+    <string name="EnterName">Enter your phone number</string>
 </resources>
