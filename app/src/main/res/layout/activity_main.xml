@@ -10,27 +10,41 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginBottom="10dp"
-        android:gravity="center">
+        android:background="@drawable/layout_bg"
+        android:orientation="vertical"
+        android:layout_marginBottom="30dp">
 
-        <TextView
-            android:id="@+id/StatusOfTravelLabel"
-            android:layout_column="0"
+        <EditText
+            android:id="@+id/InitialLocationTextInput"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            android:hint="@string/Enter_Initial_location"
+            android:drawableRight="@drawable/ic_location"
             android:layout_gravity="center"
-            android:text="@string/Status"
-            android:layout_margin="10dp"
+            android:textSize="10dp"
+            android:textColorHint="@color/black"
+            android:inputType="textPostalAddress"
+
             />
 
-    <Spinner android:id="@+id/spinner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_column="1"
-        android:layout_margin="10dp"
-        android:layout_gravity="center"
-        android:prompt="@string/country_prompt"/>
+
+        <EditText
+            android:id="@+id/DestinationTextInput"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="20dp"
+            android:hint="@string/Enter_destination"
+            android:textColorHighlight="@color/black"
+            android:drawableRight="@drawable/ic_location"
+            android:textColorHint="@color/black"
+
+            android:textSize="10dp"
+
+
+            />
 
     </LinearLayout>
 
@@ -43,14 +57,40 @@
 
         <EditText
             android:id="@+id/NameTextInput"
-            android:layout_width="wrap_content"
+            android:layout_width="250dp"
             android:layout_gravity="center"
-            android:layout_height="wrap_content"
+            android:layout_height="30dp"
+            android:textAlignment="center"
+            android:drawableRight="@drawable/ic_name"
             android:textSize="10dp"
+            android:background="@drawable/layout_edit_textr_rounded"
             android:layout_marginBottom="10dp"
             android:hint="@string/Enter_name"
-            android:textAlignment="center"
            />
+
+    <TextView
+        android:id="@+id/PhoneText"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="@string/phone"
+        android:layout_gravity="center"
+        />
+
+
+    <EditText
+        android:id="@+id/PhoneTextImput"
+        android:layout_width="250dp"
+        android:layout_gravity="center"
+        android:layout_height="30dp"
+        android:background="@drawable/layout_edit_textr_rounded"
+        android:hint="@string/Enter_phone"
+        android:textSize="10dp"
+        android:textAlignment="center"
+        android:drawableRight="@drawable/ic_phone"
+        android:layout_marginBottom="10dp"
+
+        />
+
 
 
     <TextView
@@ -65,55 +105,15 @@
             android:id="@+id/EmailTextInput"
             android:layout_width="250dp"
             android:textSize="10dp"
+            android:drawableRight="@drawable/ic_email"
             android:layout_gravity="center"
-            android:layout_height="wrap_content"
+            android:layout_height="30dp"
+            android:textAlignment="center"
             android:hint="@string/Enter_email"
-            android:layout_marginBottom="10dp"
-            android:textAlignment="center"
-
-            />
-
-        <TextView
-            android:id="@+id/InitialLocationTextLabel"
-            android:text="@string/Initial_location"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_width="wrap_content"
-            />
-
-        <EditText
-            android:id="@+id/InitialLocationTextInput"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:hint="@string/Enter_Initial_location"
-            android:layout_gravity="center"
-            android:textSize="10dp"
-            android:layout_marginBottom="10dp"
-            android:textAlignment="center"
-
-            />
-
-        <TextView
-            android:id="@+id/DestinationTextlabel"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:text="@string/Destination"
-            android:layout_gravity="center"
-            />
-
-        <EditText
-            android:id="@+id/DestinationTextInput"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:hint="@string/Enter_destination"
-            android:textSize="10dp"
-            android:layout_gravity="center"
+            android:background="@drawable/layout_edit_textr_rounded"
             android:layout_marginBottom="10dp"
 
-            android:textAlignment="center"
-
             />
-
 
     <TextView
         android:id="@+id/LeavingTimeTextLabel"
@@ -128,36 +128,18 @@
             android:id="@+id/LeavingTimeTextInput"
             android:layout_gravity="center"
             android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
+            android:layout_height="30dp"
+            android:background="@drawable/layout_edit_textr_rounded"
             android:textSize="10dp"
             android:layout_marginBottom="10dp"
             android:hint="@string/Enter_leaving_time"
-            android:textAlignment="center" />
-
-
-        <TextView
-            android:id="@+id/ArrivalTimeTextLabel"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:text="@string/Arrival_time"
-            android:layout_gravity="center"
-            />
-
-        <EditText
-            android:id="@+id/ArrivalTimeTextInPut"
-            android:layout_width="250dp"
-            android:layout_gravity="center"
-            android:layout_height="wrap_content"
-            android:hint="@string/Enter_Arrival_time"
-            android:textSize="10dp"
             android:textAlignment="center"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:layout_marginBottom="10dp"
+            android:drawableRight="@drawable/ic_time"
+/>
 
-            />
+
+
+
 
 
 

@@ -7,9 +7,9 @@
     <string name="Email">Email:</string>
     <string name="Enter_email">Enter your email</string>
     <string name="Initial_location">Initial location:</string>
-    <string name="Enter_Initial_location">Enter initial location</string>
+    <string name="Enter_Initial_location">Choose initial location</string>
     <string name="Destination">Destination:</string>
-    <string name="Enter_destination">Enter destination</string>
+    <string name="Enter_destination">Choose destination</string>
     <string name="Beginning_time">Beginning time:</string>
     <string name="Leaving_time">Leaving time:</string>
     <string name="Enter_leaving_time">Choose leaving time:</string>
@@ -20,4 +20,6 @@
     <string name="Button_Submit">Submit</string>
     <string name="Wellcome">Welcome to getTexi</string>
     <string name="EnterName">Enter your phone number</string>
+    <string name="googleMapsAPI">AIzaSyCfxtFeOPR0_YiUnPTonaOTjvmBjs95E4E</string>
+
 </resources>

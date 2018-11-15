@@ -4,8 +4,6 @@ import android.content.ContentValues;
 
 import com.cohen.gad.gettexiu.model.entities.Travel;
 
-import java.sql.Time;
-
 public class TravelConst {
 
     //------------------- Const keys for ContentValues -------------------------//
@@ -36,8 +34,8 @@ public class TravelConst {
             contentValues.put(TravelC.START_LOCATION, travel.getStartLocation());
             contentValues.put(TravelC.END_LOCATION, travel.getEndLocation());
             contentValues.put(TravelC.CUSTOMER_EMAIL, travel.getCustomerEmailAddress());
-            contentValues.put(TravelC.START_TIME, String.valueOf(travel.getStartTravelTime()));
-            contentValues.put(TravelC.END_TIME, String.valueOf(travel.getEndTravelTime()));
+            contentValues.put(TravelC.START_TIME, travel.getStartTravelTime());
+            contentValues.put(TravelC.END_TIME, travel.getEndTravelTime());
             contentValues.put(TravelC.TRAVEL_STATUS, String.valueOf(travel.getTravel_status()));
 
             return contentValues;
@@ -53,8 +51,8 @@ public class TravelConst {
              travel.setCustomerEmailAddress(contentValues.getAsString(TravelC.CUSTOMER_EMAIL));
              travel.setStartLocation(contentValues.getAsString(TravelC.START_LOCATION));
              travel.setEndLocation(contentValues.getAsString(TravelC.END_LOCATION));
-             travel.setStartTravelTime(Time.valueOf(contentValues.getAsString(TravelC.START_TIME)));
-             travel.setEndTravelTime(Time.valueOf(contentValues.getAsString(TravelC.END_TIME)));
+             travel.setStartTravelTime(contentValues.getAsString(TravelC.START_TIME));
+             travel.setEndTravelTime(contentValues.getAsString(TravelC.END_TIME));
              travel.setTravel_status(Enum.valueOf(Travel.TRAVEL_STATUS.class,contentValues.getAsString(TravelC.TRAVEL_STATUS)));
 
              return travel;

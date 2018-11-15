@@ -6,41 +6,59 @@
     android:layout_height="match_parent"
     tools:context=".controller.ScreenActivity">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/taxigif"
+        android:background="@color/yellow_"
         android:orientation="vertical"
         android:paddingLeft="16dp"
         android:paddingRight="16dp">
 
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/Wellcome"
-            android:layout_marginBottom="39dp"
-            android:textSize="40dp" />
+
+        <ImageView
+            android:id="@+id/Logo"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:layout_marginTop="70dp"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/texi_logo"/>
 
 
         <EditText
-            android:id="@+id/numberphon"
-            android:layout_width="350dp"
-            android:layout_height="60dp"
-            android:layout_marginTop="100dp"
-            android:hint="@string/Enter_phone"
-            android:textAlignment="center"/>
 
-
-        <ImageButton
-            android:id="@+id/sendButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="send"
+            android:id="@+id/PhoneNumber"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
             android:layout_gravity="center"
-            android:src="@mipmap/ic_next"/>
+            android:layout_marginTop="50dp"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/layout_bg_color_edit_text_rounded"
+            android:hint="@string/Enter_phone"
+            android:inputType="phone"
+            android:textAlignment="center"
+            android:layout_below="@+id/Logo"
+            android:textColor="@color/yellow_"
+            android:textColorHint="@color/yellow_"
+            android:textSize="15dp" />
 
-    </LinearLayout>
+
+        <com.spark.submitbutton.SubmitButton
+            android:id="@+id/sendButton"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Go"
+            android:layout_below="@+id/PhoneNumber"
+            android:textColor="@color/yellow_"
+            android:layout_centerHorizontal="true"
+
+            app:sub_btn_background="@color/black"
+            app:sub_btn_duration="3000"
+            app:sub_btn_line_color="@color/yellow_"
+            app:sub_btn_ripple_color="@color/black"
+            app:sub_btn_tick_color="@color/black" />
+
+
+
+    </RelativeLayout>
 
 </android.support.constraint.ConstraintLayout>

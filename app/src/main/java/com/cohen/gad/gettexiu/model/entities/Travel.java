@@ -1,7 +1,5 @@
 package com.cohen.gad.gettexiu.model.entities;
 
-import java.sql.Time;
-
 public class Travel {
 
     public enum TRAVEL_STATUS {AVAILABLE,OCCUPIED,FINISHED}
@@ -10,16 +8,16 @@ public class Travel {
     private TRAVEL_STATUS travel_status;
     private String startLocation;
     private String endLocation;
-    private Time startTravelTime;
-    private Time endTravelTime;
+    private String startTravelTime;
+    private String endTravelTime;
     private String customerName;
     private String customerPhoneNumber;
     private String customerEmailAddress;
 
     //---------------------------------- Constructors ----------------------------------//
 
-    public Travel(String startLocation, String endLocation, Time startTravelTime,
-                  Time endTravelTime, String customerName, String customerPhoneNumber, String customerEmailAdress) {
+    public Travel(String startLocation, String endLocation, String startTravelTime,
+                  String endTravelTime, String customerName, String customerPhoneNumber, String customerEmailAdress) {
         this.startLocation = startLocation;
         this.endLocation = endLocation;
         this.startTravelTime = startTravelTime;
@@ -49,19 +47,19 @@ public class Travel {
         this.endLocation = endLocation;
     }
 
-    public Time getStartTravelTime() {
+    public String getStartTravelTime() {
         return startTravelTime;
     }
 
-    public void setStartTravelTime(Time startTravelTime) {
+    public void setStartTravelTime(String startTravelTime) {
         this.startTravelTime = startTravelTime;
     }
 
-    public Time getEndTravelTime() {
+    public String getEndTravelTime() {
         return endTravelTime;
     }
 
-    public void setEndTravelTime(Time endTravelTime) {
+    public void setEndTravelTime(String endTravelTime) {
         this.endTravelTime = endTravelTime;
     }
 
