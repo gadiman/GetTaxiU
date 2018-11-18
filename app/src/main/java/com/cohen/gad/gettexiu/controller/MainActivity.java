@@ -24,7 +24,7 @@ import java.util.Date;
 import java.util.TimeZone;
 
 public class MainActivity extends AppCompatActivity {
-
+//f
     private EditText NameTextInput;
     private EditText EmailTextInput;
     private EditText InitialLocationTextInput;
