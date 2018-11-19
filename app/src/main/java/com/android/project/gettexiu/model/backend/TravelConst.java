@@ -1,8 +1,8 @@
-package com.cohen.gad.gettexiu.model.backend;
+package com.android.project.gettexiu.model.backend;
 
 import android.content.ContentValues;
 
-import com.cohen.gad.gettexiu.model.entities.Travel;
+import com.android.project.gettexiu.model.entities.Travel;
 
 public class TravelConst {
 

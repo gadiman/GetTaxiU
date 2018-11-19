@@ -1,4 +1,4 @@
-package com.cohen.gad.gettexiu.model.entities;
+package com.android.project.gettexiu.model.entities;
 
 public class Travel {
 
@@ -16,12 +16,13 @@ public class Travel {
 
     //---------------------------------- Constructors ----------------------------------//
 
-    public Travel(String startLocation, String endLocation, String startTravelTime,
-                  String endTravelTime, String customerName, String customerPhoneNumber, String customerEmailAdress) {
+    public Travel(String startLocation, String endLocation, String startTravelTime
+                  , String customerName, String customerPhoneNumber, String customerEmailAdress) {
         this.startLocation = startLocation;
         this.endLocation = endLocation;
         this.startTravelTime = startTravelTime;
-        this.endTravelTime = endTravelTime;
+        this.endTravelTime = "-1";
+        travel_status=TRAVEL_STATUS.AVAILABLE;
         this.customerName = customerName;
         this.customerPhoneNumber = customerPhoneNumber;
         this.customerEmailAddress = customerEmailAdress;

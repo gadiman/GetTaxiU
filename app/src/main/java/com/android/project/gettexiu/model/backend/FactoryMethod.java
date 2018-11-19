@@ -1,6 +1,6 @@
-package com.cohen.gad.gettexiu.model.backend;
+package com.android.project.gettexiu.model.backend;
 
-import com.cohen.gad.gettexiu.model.datasource.List_DBTravel;
+import com.android.project.gettexiu.model.datasource.List_DBTravel;
 
 public class FactoryMethod {
     static DB_manager manager = null ;

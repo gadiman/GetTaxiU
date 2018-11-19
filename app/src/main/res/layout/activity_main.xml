@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/layout_bg"
         android:orientation="vertical"
-        android:layout_marginBottom="30dp">
+        android:layout_marginBottom="60dp">
 
         <EditText
             android:id="@+id/InitialLocationTextInput"
@@ -78,7 +78,7 @@
 
 
     <EditText
-        android:id="@+id/PhoneTextImput"
+        android:id="@+id/PhoneTextInput"
         android:layout_width="250dp"
         android:layout_gravity="center"
         android:layout_height="30dp"
@@ -145,8 +145,11 @@
 
     <Button
     android:id="@+id/SubmitButton"
+    android:layout_marginTop="30dp"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+        android:textColor="@color/yellow_"
+        android:background="@drawable/layout_bg_color_edit_text_rounded"
     android:layout_gravity="center"
     android:text="@string/Button_Submit"/>
 

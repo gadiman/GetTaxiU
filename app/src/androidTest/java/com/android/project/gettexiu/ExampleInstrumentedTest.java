@@ -1,4 +1,4 @@
-package com.cohen.gad.gettexiu;
+package com.android.project.gettexiu;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

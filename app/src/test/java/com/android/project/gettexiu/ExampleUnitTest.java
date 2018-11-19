@@ -1,4 +1,4 @@
-package com.cohen.gad.gettexiu;
+package com.android.project.gettexiu;
 
 import org.junit.Test;
 

@@ -1,4 +1,4 @@
-package com.cohen.gad.gettexiu.controller;
+package com.android.project.gettexiu.controller;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -10,7 +10,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.cohen.gad.gettexiu.R;
+import com.android.project.gettexiu.R;
 import com.spark.submitbutton.SubmitButton;
 
 public class ScreenActivity extends Activity {
@@ -24,12 +24,6 @@ public class ScreenActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_screen);
         findViews();
-
-
-
-
-
-
     }
 
     private void findViews() {
@@ -43,11 +37,13 @@ public class ScreenActivity extends Activity {
             @Override
             public void onClick(View v) {
 
-                Toast.makeText(ScreenActivity.this,"GO",Toast.LENGTH_SHORT).show();
+                Toast.makeText(ScreenActivity.this,"Submit",Toast.LENGTH_SHORT).show();
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        startActivity( nextIntent );
+                        String str= phoneNumber.getText().toString();
+                        nextIntent.putExtra("Phone",str);
+                        startActivity(nextIntent);
                     }
                 }, 3000);
             }
@@ -68,7 +64,7 @@ public class ScreenActivity extends Activity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if(s.length()> 10)
+                if(s.length()> 10 || s.length() <10)
                     submitButton.setVisibility(View.GONE);
 
             }

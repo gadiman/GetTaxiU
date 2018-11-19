@@ -1,14 +1,14 @@
-package com.cohen.gad.gettexiu.model.datasource;
+package com.android.project.gettexiu.model.datasource;
 
 import android.content.ContentValues;
 
-import com.cohen.gad.gettexiu.model.backend.DB_manager;
-import com.cohen.gad.gettexiu.model.entities.Travel;
+import com.android.project.gettexiu.model.backend.DB_manager;
+import com.android.project.gettexiu.model.entities.Travel;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.cohen.gad.gettexiu.model.backend.TravelConst.*;
+import static com.android.project.gettexiu.model.backend.TravelConst.ContentValuesToTravel;
 
 public class List_DBTravel implements DB_manager {
 
@@ -31,7 +31,11 @@ public class List_DBTravel implements DB_manager {
     }
 
     @Override
-    public void removeTravel(ContentValues travel) {
-
+    public boolean checkIfTravelAdded(String Phone) {
+        for (Travel it:travels) {
+            if (it.getCustomerPhoneNumber() == Phone)
+                return true;
+        }
+        return false;
     }
 }
