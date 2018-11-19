@@ -1,9 +1,8 @@
-package com.android.project.gettexiu.controller;
+package com.cohen.gad.gettexiu.controller;
 
-import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
@@ -12,11 +11,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TimePicker;
-import android.widget.Toast;
 
-import com.android.project.gettexiu.R;
-import com.android.project.gettexiu.model.backend.FactoryMethod;
-import com.android.project.gettexiu.model.entities.Travel;
+import com.cohen.gad.gettexiu.R;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.location.places.Place;
@@ -28,18 +24,15 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
 
-import static com.android.project.gettexiu.model.backend.TravelConst.TravelToContentValues;
-
 public class MainActivity extends AppCompatActivity {
-
+//f
     private EditText NameTextInput;
     private EditText EmailTextInput;
     private EditText InitialLocationTextInput;
     private EditText DestinationTextInput;
     private EditText LeavingTimeTextInput;
     private EditText ArrivalTimeTextInPut;
-    private Button submitButton;
-    private  EditText PhoneNumber_;
+    private Button SubmitButton;
     private TimePickerDialog timePickerDialog;
     private final static int PLACE_PICKER_RESULT =1;
     private final static int PLACE_PICKER_RESULT_ =2;
@@ -47,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
     int currentHour;
     int currentMinute;
     String amPm;
-
+    AlertDialog.Builder  builder = new AlertDialog.Builder(this);
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -57,6 +50,16 @@ public class MainActivity extends AppCompatActivity {
 
         findViews();
 
+        Button Submit_Button=findViewById( R.id.SubmitButton );
+        Submit_Button.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                /*לבדוק שהוזנו פרטים??*/
+                builder.setMessage("Data entered successfully");
+                builder.show();
+            }
+        });
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -66,16 +69,22 @@ public class MainActivity extends AppCompatActivity {
         InitialLocationTextInput = (EditText)findViewById( R.id.InitialLocationTextInput );
         DestinationTextInput = (EditText)findViewById( R.id.DestinationTextInput );
         LeavingTimeTextInput = (EditText)findViewById( R.id.LeavingTimeTextInput );
-        submitButton = (Button)findViewById(R.id.SubmitButton);
-        PhoneNumber_ = (EditText)findViewById(R.id.PhoneTextInput);
+        SubmitButton= (Button)findViewById(R.id.SubmitButton);
+
+        LeavingTimeTextInput.setShowSoftInputOnFocus(false);
+        InitialLocationTextInput.setShowSoftInputOnFocus(false);
+        DestinationTextInput.setShowSoftInputOnFocus(false);
+
+        Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("GMT+2:00"));
+        Date currentLocalTime = cal.getTime();
+        DateFormat date = new SimpleDateFormat("HH:mm");
+        date.setTimeZone(TimeZone.getTimeZone("GMT+2:00"));
+        String localTime = date.format(currentLocalTime);
+        LeavingTimeTextInput.setText(localTime);
 
 
-        setInitialValues();
-        createListeners();
-    }
 
-    private void createListeners() {
-
+        //SubmitButton.setOnClickListener((View.OnClickListener) this);
         LeavingTimeTextInput.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -86,12 +95,22 @@ public class MainActivity extends AppCompatActivity {
                 timePickerDialog = new TimePickerDialog(MainActivity.this, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int hourOfDay, int minutes) {
-                        LeavingTimeTextInput.setText(String.format("%02d:%02d ", hourOfDay, minutes) );
+                        if (hourOfDay >= 12) {
+                            amPm = "PM";
+                        } else {
+                            amPm = "AM";
+                        }
+                        LeavingTimeTextInput.setText(String.format("%02d:%02d ", hourOfDay, minutes) + amPm);
                     }
                 }, currentHour, currentMinute, false);
+
                 timePickerDialog.show();
             }
         });
+
+
+
+
 
         InitialLocationTextInput.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -127,61 +146,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        submitButton.setOnClickListener(new View.OnClickListener() {
-
-            @SuppressLint("StaticFieldLeak")
-            @Override
-            public void onClick(View v) {
-
-                Travel travel = new Travel(
-                        InitialLocationTextInput.getText().toString(),
-                        DestinationTextInput.getText().toString(),
-                        LeavingTimeTextInput.getText().toString(),
-                        NameTextInput.getText().toString(),
-                        getIntent().getStringExtra("Phone"),
-                        EmailTextInput.getText().toString());
-
-                new AsyncTask<Void, Void, Boolean>() {
-
-                    @Override
-                    protected Boolean doInBackground(Void... voids) {
-                        FactoryMethod.getManager().addNewTravel(TravelToContentValues(travel));
-                        return FactoryMethod.getManager().checkIfTravelAdded(getIntent().getStringExtra("Phone"));
-                    }
-
-                    @Override
-                    protected void onPostExecute(Boolean aBoolean) {
-                        super.onPostExecute(aBoolean);
-                        if(aBoolean)
-                            Toast.makeText( MainActivity.this,"Add to database successful", Toast.LENGTH_SHORT).show();
-                        else
-                            Toast.makeText( MainActivity.this,"Add to database not successful", Toast.LENGTH_SHORT).show();
-
-
-                    }
-                }.execute();
-
-            }
-        });
-    }
-
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    private void setInitialValues() {
-        LeavingTimeTextInput.setShowSoftInputOnFocus(false);
-        InitialLocationTextInput.setShowSoftInputOnFocus(false);
-        DestinationTextInput.setShowSoftInputOnFocus(false);
-
-
-        Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("GMT+2:00"));
-        Date currentLocalTime = cal.getTime();
-        DateFormat date = new SimpleDateFormat("HH:mm");
-        date.setTimeZone(TimeZone.getTimeZone("GMT+2:00"));
-        String localTime = date.format(currentLocalTime);
-        LeavingTimeTextInput.setText(localTime);
-        PhoneNumber_.setText(getIntent().getStringExtra("Phone"));
 
     }
-
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
 
@@ -199,9 +165,6 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
-
-
-
 
 
 }
