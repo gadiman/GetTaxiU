@@ -1,11 +1,9 @@
 package com.android.project.gettexiu.controller;
 
-import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -19,6 +17,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -28,9 +27,8 @@ import com.android.project.gettexiu.model.entities.Travel;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
 import com.google.android.gms.location.places.ui.PlacePicker;
-
-import org.shredzone.commons.suncalc.SunTimes;
 
 import java.io.IOException;
 import java.text.DateFormat;
@@ -50,10 +48,13 @@ public class MainActivity extends AppCompatActivity {
     private EditText InitialLocationTextInput;
     private EditText DestinationTextInput;
     private EditText LeavingTimeTextInput;
-    private EditText ArrivalTimeTextInPut;
+    private PlaceAutocompleteFragment placeAutocompleteFragment1;
+    private PlaceAutocompleteFragment placeAutocompleteFragment2;
     private Button submitButton;
     private EditText PhoneNumber_;
     private TimePickerDialog timePickerDialog;
+    private ImageButton DestinationPlacePicker;
+    private ImageButton InitialLocationPlacePicker;
     private final static int PLACE_PICKER_RESULT = 1;
     private final static int PLACE_PICKER_RESULT_ = 2;
     Calendar calendar;
@@ -82,11 +83,15 @@ public class MainActivity extends AppCompatActivity {
     private void findViews() {
         NameTextInput = (EditText) findViewById(R.id.NameTextInput);
         EmailTextInput = (EditText) findViewById(R.id.EmailTextInput);
-        InitialLocationTextInput = (EditText) findViewById(R.id.InitialLocationTextInput);
-        DestinationTextInput = (EditText) findViewById(R.id.DestinationTextInput);
+        //InitialLocationTextInput = (EditText) findViewById(R.id.InitialLocationTextInput);
+        //DestinationTextInput = (EditText) findViewById(R.id.DestinationTextInput);
         LeavingTimeTextInput = (EditText) findViewById(R.id.LeavingTimeTextInput);
         submitButton = (Button) findViewById(R.id.SubmitButton);
         PhoneNumber_ = (EditText) findViewById(R.id.PhoneTextInput);
+        DestinationPlacePicker =(ImageButton)findViewById(R.id.destinationPickPlase);
+        InitialLocationPlacePicker= (ImageButton)findViewById(R.id.initialLocationPickPlace);
+        placeAutocompleteFragment1 = (PlaceAutocompleteFragment)getFragmentManager().findFragmentById( R.id.place_autocomplete_fragment1 );
+        placeAutocompleteFragment2 = (PlaceAutocompleteFragment)getFragmentManager().findFragmentById( R.id.place_autocomplete_fragment2 );
 
 
         setInitialValues();
@@ -112,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        InitialLocationTextInput.setOnClickListener(new View.OnClickListener() {
+        InitialLocationPlacePicker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
@@ -129,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        DestinationTextInput.setOnClickListener(new View.OnClickListener() {
+        DestinationPlacePicker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
@@ -187,8 +192,8 @@ public class MainActivity extends AppCompatActivity {
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private void setInitialValues() {
         LeavingTimeTextInput.setShowSoftInputOnFocus(false);
-        InitialLocationTextInput.setShowSoftInputOnFocus(false);
-        DestinationTextInput.setShowSoftInputOnFocus(false);
+        //InitialLocationTextInput.setShowSoftInputOnFocus(false);
+       // DestinationTextInput.setShowSoftInputOnFocus(false);
 
 
         Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("GMT+2:00"));
@@ -200,31 +205,8 @@ public class MainActivity extends AppCompatActivity {
         PhoneNumber_.setText(getIntent().getStringExtra("Phone"));
         locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
 
-
-        // Define a listener that responds to location updates
-        locationListener = new LocationListener() {
-            public void onLocationChanged(Location location) {
-
-                showSunTimes(location.getLatitude(), location.getLongitude()); /// ...
-
-                // Called when a new location is found by the network location provider.
-                //    Toast.makeText(getBaseContext(), location.toString(), Toast.LENGTH_LONG).show();
-                InitialLocationTextInput.setText(getPlace(location));////location.toString());
-
-                // Remove the listener you previously added
-                //  locationManager.removeUpdates(locationListener);
-            }
-
-            public void onStatusChanged(String provider, int status, Bundle extras) {
-            }
-
-            public void onProviderEnabled(String provider) {
-            }
-
-            public void onProviderDisabled(String provider) {
-            }
-        };
-
+        placeAutocompleteFragment1.setHint("כתובת  מוצא");
+        placeAutocompleteFragment2.setHint("כתובת היעד");
 
     }
 
@@ -246,16 +228,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    void showSunTimes(double lat, double lng) {
-        Date date = new Date();// date of calculation
-
-        SunTimes times = SunTimes.compute()
-                .on(date)       // set a date
-                .at(lat, lng)   // set a location
-                .execute();     // get the results
-        System.out.println("Sunrise: " + times.getRise());
-        System.out.println("Sunset: " + times.getSet());
-    }
 
     public String getPlace(Location location) {
 
@@ -283,32 +255,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private void getLocation() throws IOException {
 
-        //     Check the SDK version and whether the permission is already granted or not.
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 5);
-        } else {
-            // Android version is lesser than 6.0 or the permission is already granted.
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
-
-        }
-
-    }
-
-    @SuppressLint("MissingPermission")
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        if (requestCode == 5) {
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
-            } else {
-                Toast.makeText(this, "Until you grant the permission, we canot display the location", Toast.LENGTH_SHORT).show();
-            }
-        }
-
-
-    }
 
 
 
