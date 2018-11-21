@@ -157,7 +157,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Travel travel = new Travel(
+                final Travel travel = new Travel(
                         InitialLocationTextInput.getText().toString(),
                         DestinationTextInput.getText().toString(),
                         LeavingTimeTextInput.getText().toString(),
