@@ -14,37 +14,74 @@
         android:orientation="vertical"
         android:layout_marginBottom="60dp">
 
-        <EditText
-            android:id="@+id/InitialLocationTextInput"
-            android:layout_width="250dp"
+        <LinearLayout
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="20dp"
-            android:hint="@string/Enter_Initial_location"
-            android:drawableRight="@drawable/ic_location"
-            android:layout_gravity="center"
-            android:textSize="10dp"
-            android:textColorHint="@color/black"
-            android:inputType="textPostalAddress"
-
-            />
+            android:orientation="horizontal">
 
 
-        <EditText
-            android:id="@+id/DestinationTextInput"
-            android:layout_width="250dp"
+
+            <fragment
+                android:id="@+id/place_autocomplete_fragment1"
+                android:name="com.google.android.gms.location.places.ui.PlaceAutocompleteFragment"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:layout_column="0"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:hint="@string/Enter_destination"
+                android:textColorHighlight="@color/black"
+                android:drawableRight="@drawable/ic_location"
+                android:textColorHint="@color/black"
+                />
+
+
+            <ImageButton
+                android:id="@+id/initialLocationPickPlace"
+                android:layout_width="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_pick_location"
+
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginBottom="20dp"
-            android:hint="@string/Enter_destination"
-            android:textColorHighlight="@color/black"
-            android:drawableRight="@drawable/ic_location"
-            android:textColorHint="@color/black"
+            android:orientation="horizontal">
 
-            android:textSize="10dp"
+            <fragment
+                android:id="@+id/place_autocomplete_fragment2"
+                android:name="com.google.android.gms.location.places.ui.PlaceAutocompleteFragment"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:hint="@string/Enter_destination"
+                android:textColorHighlight="@color/black"
+                android:drawableRight="@drawable/ic_location"
+                android:textColorHint="@color/black"
+                />
 
 
-            />
+
+            <ImageButton
+                android:id="@+id/destinationPickPlase"
+                android:layout_width="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_pick_location"
+
+
+                />
+        </LinearLayout>
 
     </LinearLayout>
 
