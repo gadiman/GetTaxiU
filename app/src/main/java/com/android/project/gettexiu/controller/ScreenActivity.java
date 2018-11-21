@@ -62,6 +62,8 @@ public class ScreenActivity extends Activity {
                 if(s.length()== 10)
                     submitButton.setVisibility(View.VISIBLE);
 
+
+
             }
 
             @Override
