@@ -158,8 +158,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 final Travel travel = new Travel(
-                        placeAutocompleteFragment1.toString(),
-                        placeAutocompleteFragment2.toString(),
+                        InitialLocationTextInput.getText().toString(),
+                        DestinationTextInput.getText().toString(),
                         LeavingTimeTextInput.getText().toString(),
                         NameTextInput.getText().toString(),
                         getIntent().getStringExtra("Phone"),
@@ -169,8 +169,8 @@ public class MainActivity extends AppCompatActivity {
 
                     @Override
                     protected Boolean doInBackground(Void... voids) {
-                        String id= FactoryMethod.getManager().addNewTravel(TravelToContentValues(travel));
-                        return FactoryMethod.getManager().checkIfTravelAdded(id);
+                        FactoryMethod.getManager().addNewTravel(TravelToContentValues(travel));
+                        return FactoryMethod.getManager().checkIfTravelAdded(getIntent().getStringExtra("Phone"));
                     }
 
                     @Override
