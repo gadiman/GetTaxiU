@@ -24,10 +24,11 @@ public class List_DBTravel implements DB_manager {
     //---------------------------------- Functions ------------------------------------//
 
     @Override
-    public void addNewTravel(ContentValues travel) {
+    public String addNewTravel(ContentValues travel) {
 
         Travel travel_ = ContentValuesToTravel(travel);
         travels.add(travel_);
+        return travel_.getCustomerPhoneNumber();
     }
 
     @Override

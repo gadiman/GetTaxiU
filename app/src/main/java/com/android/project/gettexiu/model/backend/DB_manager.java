@@ -5,6 +5,6 @@ import android.content.ContentValues;
 public interface DB_manager {
 
     //------------------------------- Functions -------------------------------//
-    public void addNewTravel(ContentValues travel);
+    public String addNewTravel(ContentValues travel);
     public boolean checkIfTravelAdded(String id);
 }
