@@ -1,13 +1,13 @@
 package com.android.project.gettexiu.model.backend;
 
-import com.android.project.gettexiu.model.datasource.FireBase_DBTravel;
+import com.android.project.gettexiu.model.datasource.List_DBTravel;
 
 public class FactoryMethod {
     static DB_manager manager = null ;
 
     public static DB_manager getManager() {
         if (manager == null)
-            manager = new FireBase_DBTravel();
+            manager = new List_DBTravel();
 
         return manager;
     }
