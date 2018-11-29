@@ -24,7 +24,7 @@
             <fragment
                 android:id="@+id/place_autocomplete_fragment1"
                 android:name="com.google.android.gms.location.places.ui.PlaceAutocompleteFragment"
-                android:layout_width="250dp"
+                android:layout_width="350dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0"
                 android:layout_column="0"
@@ -58,7 +58,7 @@
             <fragment
                 android:id="@+id/place_autocomplete_fragment2"
                 android:name="com.google.android.gms.location.places.ui.PlaceAutocompleteFragment"
-                android:layout_width="250dp"
+                android:layout_width="350dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -76,6 +76,7 @@
                 android:id="@+id/destinationPickPlase"
                 android:layout_width="wrap_content"
                 android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/ic_pick_location"
 

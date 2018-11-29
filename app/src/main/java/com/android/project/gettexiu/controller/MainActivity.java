@@ -41,7 +41,9 @@ import java.util.TimeZone;
 
 import static com.android.project.gettexiu.model.backend.TravelConst.TravelToContentValues;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+
+    //---------------------------------- Fields ------------------------------------------//
 
     private EditText NameTextInput;
     private EditText EmailTextInput;
@@ -60,13 +62,12 @@ public class MainActivity extends AppCompatActivity {
     Calendar calendar;
     int currentHour;
     int currentMinute;
-
     // Acquire a reference to the system Location Manager
     LocationManager locationManager;
     // Define a listener that responds to location updates
     LocationListener locationListener;
 
-    String amPm;
+    //---------------------------------- Functions ------------------------------------//
 
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -76,11 +77,16 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         findViews();
+        setInitialValues();
+        createListeners();
 
     }
 
+
+    //This function load all the xml Objects
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private void findViews() {
+
         NameTextInput = (EditText) findViewById(R.id.NameTextInput);
         EmailTextInput = (EditText) findViewById(R.id.EmailTextInput);
         //InitialLocationTextInput = (EditText) findViewById(R.id.InitialLocationTextInput);
@@ -92,125 +98,134 @@ public class MainActivity extends AppCompatActivity {
         InitialLocationPlacePicker= (ImageButton)findViewById(R.id.initialLocationPickPlace);
         placeAutocompleteFragment1 = (PlaceAutocompleteFragment)getFragmentManager().findFragmentById( R.id.place_autocomplete_fragment1 );
         placeAutocompleteFragment2 = (PlaceAutocompleteFragment)getFragmentManager().findFragmentById( R.id.place_autocomplete_fragment2 );
-
-
-        setInitialValues();
-        createListeners();
     }
 
+    //This function set all the Listeners
     private void createListeners() {
 
-        LeavingTimeTextInput.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                calendar = Calendar.getInstance();
-                currentHour = calendar.get(Calendar.HOUR_OF_DAY);
-                currentMinute = calendar.get(Calendar.MINUTE);
-
-                timePickerDialog = new TimePickerDialog(MainActivity.this, new TimePickerDialog.OnTimeSetListener() {
-                    @Override
-                    public void onTimeSet(TimePicker timePicker, int hourOfDay, int minutes) {
-                        LeavingTimeTextInput.setText(String.format("%02d:%02d ", hourOfDay, minutes));
-                    }
-                }, currentHour, currentMinute, false);
-                timePickerDialog.show();
-            }
-        });
-
-        InitialLocationPlacePicker.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
-
-                Intent intent;
-
-                try {
-                    startActivityForResult(builder.build(MainActivity.this), PLACE_PICKER_RESULT);
-                } catch (GooglePlayServicesRepairableException e) {
-                    e.printStackTrace();
-                } catch (GooglePlayServicesNotAvailableException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-
-        DestinationPlacePicker.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
-
-                Intent intent;
-
-                try {
-                    startActivityForResult(builder.build(MainActivity.this), PLACE_PICKER_RESULT_);
-                } catch (GooglePlayServicesRepairableException e) {
-                    e.printStackTrace();
-                } catch (GooglePlayServicesNotAvailableException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-
-        submitButton.setOnClickListener(new View.OnClickListener() {
-
-            @SuppressLint("StaticFieldLeak")
-            @Override
-            public void onClick(View v) {
-
-                final Travel travel = new Travel(
-                        placeAutocompleteFragment1.toString(),
-                        placeAutocompleteFragment2.toString(),
-                        LeavingTimeTextInput.getText().toString(),
-                        NameTextInput.getText().toString(),
-                        getIntent().getStringExtra("Phone"),
-                        EmailTextInput.getText().toString());
-
-                new AsyncTask<Void, Void, Boolean>() {
-
-                    @Override
-                    protected Boolean doInBackground(Void... voids) {
-                        String id= FactoryMethod.getManager().addNewTravel(TravelToContentValues(travel));
-                        return FactoryMethod.getManager().checkIfTravelAdded(id);
-                    }
-
-                    @Override
-                    protected void onPostExecute(Boolean aBoolean) {
-                        super.onPostExecute(aBoolean);
-                        if (aBoolean)
-                            Toast.makeText(MainActivity.this, "Add to database successful", Toast.LENGTH_SHORT).show();
-                        else
-                            Toast.makeText(MainActivity.this, "Add to database not successful", Toast.LENGTH_SHORT).show();
-
-
-                    }
-                }.execute();
-
-            }
-        });
+        LeavingTimeTextInput.setOnClickListener(this);
+        InitialLocationPlacePicker.setOnClickListener(this);
+        DestinationPlacePicker.setOnClickListener(this);
+        submitButton.setOnClickListener(this);
     }
 
+    //This function activates functions according to the pressed xml object
+    @Override
+    public void onClick(View v) {
+        if(v == LeavingTimeTextInput)
+            setTimeByTimePicker();
+        if(v == InitialLocationPlacePicker)
+            setInitialPlaceByPlacePicker();
+        if(v == DestinationPlacePicker)
+            setDestinationByPlacePicker();
+        if (v == submitButton)
+            submitNewTravel();
+    }
+
+    //This function activate the Place Picker for initial place
+    private void setInitialPlaceByPlacePicker() {
+        PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
+
+        Intent intent;
+
+        try {
+            startActivityForResult(builder.build(MainActivity.this), PLACE_PICKER_RESULT);
+        } catch (GooglePlayServicesRepairableException e) {
+            e.printStackTrace();
+        } catch (GooglePlayServicesNotAvailableException e) {
+            e.printStackTrace();
+        }
+    }
+
+    //This function activate the Place Picker for destination place
+    private void setDestinationByPlacePicker() {
+        PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
+
+        Intent intent;
+
+        try {
+            startActivityForResult(builder.build(MainActivity.this), PLACE_PICKER_RESULT_);
+        } catch (GooglePlayServicesRepairableException e) {
+            e.printStackTrace();
+        } catch (GooglePlayServicesNotAvailableException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    //This function activate the Time Picker for initial time of ride
+    private void setTimeByTimePicker() {
+
+        calendar = Calendar.getInstance();
+        currentHour = calendar.get(Calendar.HOUR_OF_DAY);
+        currentMinute = calendar.get(Calendar.MINUTE);
+
+        timePickerDialog = new TimePickerDialog(MainActivity.this, new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker timePicker, int hourOfDay, int minutes) {
+                LeavingTimeTextInput.setText(String.format("%02d:%02d ", hourOfDay, minutes));
+            }
+        }, currentHour, currentMinute, false);
+        timePickerDialog.show();
+
+    }
+
+    //This function add travel to Database by asynchronous task
+    @SuppressLint("StaticFieldLeak")
+    private void submitNewTravel() {
+        final Travel travel = new Travel(
+                placeAutocompleteFragment1.toString(),
+                placeAutocompleteFragment2.toString(),
+                LeavingTimeTextInput.getText().toString(),
+                NameTextInput.getText().toString(),
+                getIntent().getStringExtra("Phone"),
+                EmailTextInput.getText().toString());
+
+        new AsyncTask<Void, Void, Boolean>() {
+
+            @Override
+            protected Boolean doInBackground(Void... voids) {
+                String id= FactoryMethod.getManager().addNewTravel(TravelToContentValues(travel));
+                return FactoryMethod.getManager().checkIfTravelAdded(id);
+            }
+
+            @Override
+            protected void onPostExecute(Boolean aBoolean) {
+                super.onPostExecute(aBoolean);
+                if (aBoolean)
+                    Toast.makeText(MainActivity.this, "Add to database successful", Toast.LENGTH_SHORT).show();
+                else
+                    Toast.makeText(MainActivity.this, "Add to database not successful", Toast.LENGTH_SHORT).show();
+
+
+            }
+        }.execute();
+
+    }
+
+
+    //This function set initial values on the xml Objects
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private void setInitialValues() {
+
+        //set the current time by default
         LeavingTimeTextInput.setShowSoftInputOnFocus(false);
-        //InitialLocationTextInput.setShowSoftInputOnFocus(false);
-        // DestinationTextInput.setShowSoftInputOnFocus(false);
-
-
         Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("GMT+2:00"));
         Date currentLocalTime = cal.getTime();
         DateFormat date = new SimpleDateFormat("HH:mm");
         date.setTimeZone(TimeZone.getTimeZone("GMT+2:00"));
         String localTime = date.format(currentLocalTime);
         LeavingTimeTextInput.setText(localTime);
+        //set the phone number that was send by previous Activity
         PhoneNumber_.setText(getIntent().getStringExtra("Phone"));
-        locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
 
-        placeAutocompleteFragment1.setHint("כתובת  מוצא");
-        placeAutocompleteFragment2.setHint("כתובת היעד");
+        locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+        placeAutocompleteFragment1.setHint("Initial location");
+        placeAutocompleteFragment2.setHint("Destination");
 
     }
 
-
+    //This function use for  the PlacePickers results
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         if (requestCode == PLACE_PICKER_RESULT || requestCode == PLACE_PICKER_RESULT_) {
@@ -221,9 +236,9 @@ public class MainActivity extends AppCompatActivity {
                 Double longitude = place.getLatLng().longitude;
 
                 if (requestCode == PLACE_PICKER_RESULT)
-                    InitialLocationTextInput.setText(address);
+                    placeAutocompleteFragment1.setText(address);
                 else if (requestCode == PLACE_PICKER_RESULT_)
-                    DestinationTextInput.setText(address);
+                    placeAutocompleteFragment2.setText(address);
             }
         }
     }
@@ -253,6 +268,7 @@ public class MainActivity extends AppCompatActivity {
         }
         return "IOException ...";
     }
+
 
 
 }
