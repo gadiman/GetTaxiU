@@ -1,25 +1,26 @@
 package com.android.project.gettexiu.controller;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.android.project.gettexiu.R;
 import com.spark.submitbutton.SubmitButton;
 
-public class ScreenActivity extends Activity {
+public class OpenActivity extends Activity {
 
+    //---------------------------------- Fields ------------------------------------------//
     SubmitButton submitButton;
     EditText phoneNumber;
 
-
+    //---------------------------------- Functions --------------------------------------//
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,8 +29,9 @@ public class ScreenActivity extends Activity {
         findViews();
     }
 
+    //This function load all the xml Objects and create Listeners
     private void findViews() {
-        final Intent nextIntent=new Intent( ScreenActivity.this, MainActivity.class);
+        final Intent nextIntent=new Intent( OpenActivity.this, MainActivity.class);
         submitButton = (SubmitButton) findViewById(R.id.sendButton);
         phoneNumber= (EditText) findViewById(R.id.PhoneNumber) ;
         submitButton.setVisibility(View.GONE);
@@ -39,7 +41,6 @@ public class ScreenActivity extends Activity {
             @Override
             public void onClick(View v) {
 
-                Toast.makeText(ScreenActivity.this,"Submit",Toast.LENGTH_SHORT).show();
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -59,9 +60,15 @@ public class ScreenActivity extends Activity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(s.length()== 10)
+                if(s.length()== 10) {
                     submitButton.setVisibility(View.VISIBLE);
-
+                    View view = getCurrentFocus();
+                    if(view != null)
+                    {
+                        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                        imm.hideSoftInputFromWindow(view.getWindowToken(),0);
+                    }
+                }
 
 
             }
