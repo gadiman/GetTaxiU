@@ -3,13 +3,14 @@ package com.android.project.gettexiu.model.datasource;
 import android.content.ContentValues;
 
 import com.android.project.gettexiu.model.backend.DB_manager;
+import com.android.project.gettexiu.model.entities.Travel;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 
 public class FireBase_DBTravel  implements DB_manager {
     @Override
-    public String addNewTravel(ContentValues travel) {
+    public String addNewTravel(Travel travel) {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference firebaseRef = database.getReference( "Travels" );
 
@@ -19,6 +20,8 @@ public class FireBase_DBTravel  implements DB_manager {
         TravelRef.setValue(travel);
         //return the key for checking if the insert succeeded
         return TravelRef.push().getKey();
+
+
     }
 
     @Override

@@ -288,7 +288,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 @Override
                 protected Boolean doInBackground(Void... voids) {
-                    String id = FactoryMethod.getManager().addNewTravel(TravelToContentValues(travel));
+                    String id = FactoryMethod.getManager().addNewTravel(travel);
                     return FactoryMethod.getManager().checkIfTravelAdded(id);
                 }
 
