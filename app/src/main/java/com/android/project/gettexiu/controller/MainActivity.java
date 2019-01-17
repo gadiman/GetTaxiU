@@ -511,7 +511,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
             if (addresses.size() > 0) {
-                initialLocationLongitude_ =location.getLatitude();
+                intialLocationLatitude_ =location.getLatitude();
                 initialLocationLongitude_ = location.getLongitude();
                 destinetionCityName_ =  addresses.get(0).getAddressLine(0);
                 String stateName = addresses.get(0).getAddressLine(1);
