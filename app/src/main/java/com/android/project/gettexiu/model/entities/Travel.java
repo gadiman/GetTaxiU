@@ -13,11 +13,17 @@ public class Travel {
     private String customerName;
     private String customerPhoneNumber;
     private String customerEmailAddress;
+    private String destinetionCityName;
+    private double intialLocationLatitude;
+    private double initialLocationLongitude;
+    private double destinetionLatitude;
+    private double destinetionLongitude;
 
     //---------------------------------- Constructors ----------------------------------//
 
     public Travel(String startLocation, String endLocation, String startTravelTime
-                  , String customerName, String customerPhoneNumber, String customerEmailAdress) {
+                  , String customerName, String customerPhoneNumber, String customerEmailAdress,
+            String desCity, double inLatitude, double inLong,double desLatitude, double desLong) {
         this.startLocation = startLocation;
         this.endLocation = endLocation;
         this.startTravelTime = startTravelTime;
@@ -26,6 +32,11 @@ public class Travel {
         this.customerName = customerName;
         this.customerPhoneNumber = customerPhoneNumber;
         this.customerEmailAddress = customerEmailAdress;
+        this.destinetionCityName = desCity;
+        this.intialLocationLatitude =inLatitude;
+        this.initialLocationLongitude = inLong;
+        this.destinetionLatitude =desLatitude;
+        this.destinetionLongitude =desLong;
     }
 
     public Travel(){
@@ -95,5 +106,49 @@ public class Travel {
     public void setTravel_status(TRAVEL_STATUS travel_status) {
         this.travel_status = travel_status;
     }
+
+
+
+    public String getDestinetionCityName() {
+        return destinetionCityName;
+    }
+
+    public void setDestinetionCityName(String destinetionCityName) {
+        this.destinetionCityName = destinetionCityName;
+    }
+
+    public double getIntialLocationLatitude() {
+        return intialLocationLatitude;
+    }
+
+    public void setIntialLocationLatitude(double intialLocationLatitude) {
+        this.intialLocationLatitude = intialLocationLatitude;
+    }
+
+    public double getInitialLocationLongitude() {
+        return initialLocationLongitude;
+    }
+
+    public void setInitialLocationLongitude(double initialLocationLongitude) {
+        this.initialLocationLongitude = initialLocationLongitude;
+    }
+
+    public double getDestinetionLatitude() {
+        return destinetionLatitude;
+    }
+
+    public void setDestinetionLatitude(double destinetionLatitude) {
+        this.destinetionLatitude = destinetionLatitude;
+    }
+
+    public double getDestinetionLongitude() {
+        return destinetionLongitude;
+    }
+
+    public void setDestinetionLongitude(double destinetionLongitude) {
+        this.destinetionLongitude = destinetionLongitude;
+    }
+
+
 
 }

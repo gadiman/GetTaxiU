@@ -36,6 +36,7 @@ import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
 import com.google.android.gms.location.places.ui.PlacePicker;
 import com.google.android.gms.location.places.ui.PlaceSelectionListener;
+import com.google.android.gms.maps.model.LatLng;
 
 import org.shredzone.commons.suncalc.SunTimes;
 
@@ -77,6 +78,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     //Those fields to store the locations into the travel objects
     String InitialAddress ="";
     String Destination= "";
+    private String destinetionCityName_;
+    private double intialLocationLatitude_;
+    private double initialLocationLongitude_;
+    private double destinetionLatitude_;
+    private double destinetionLongitude_;
     //Those fields to manager the location
     // Acquire a reference to the system Location Manager
     LocationManager locationManager;
@@ -142,6 +148,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onPlaceSelected(Place place) {
                 locationA.setLatitude(place.getLatLng().latitude);
                 locationA.setLongitude(place.getLatLng().longitude);
+                intialLocationLatitude_ = place.getLatLng().latitude;
+                initialLocationLongitude_ =place.getLatLng().longitude;
+                getCityName(initialLocationLongitude_,intialLocationLatitude_);
                 // .getAddress().toString();//get place details here
                 InitialAddress = place.getAddress().toString();
                 placeAutocompleteFragment1.setText(place.getAddress().toString());
@@ -160,6 +169,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 //  to = place.getAddress().toString();//get place details here
                 locationB.setLatitude(place.getLatLng().latitude);
                 locationB.setLongitude(place.getLatLng().longitude);
+                destinetionLatitude_ =place.getLatLng().latitude;
+                destinetionLongitude_ = place.getLatLng().longitude;
+                getCityName(destinetionLongitude_,destinetionLatitude_);
                 Destination = place.getAddress().toString();
             }
 
@@ -179,7 +191,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 // Called when a new location is found by the network location provider.
                 //    Toast.makeText(getBaseContext(), location.toString(), Toast.LENGTH_LONG).show();
                placeAutocompleteFragment1.setText(getPlace(location));////location.toString());
-                InitialAddress=getPlace(location);
+               InitialAddress=getPlace(location);
+
 
                 // Remove the listener you previously added
                 // locationManager.removeUpdates(locationListener);
@@ -282,7 +295,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     LeavingTimeTextInput.getText().toString(),
                     NameTextInput.getText().toString(),
                     PhoneNumber_.getText().toString(),
-                    EmailTextInput.getText().toString());
+                    EmailTextInput.getText().toString(),
+                    destinetionCityName_,
+                    intialLocationLatitude_,
+                    initialLocationLongitude_,
+                    destinetionLatitude_,
+                    destinetionLongitude_);
 
             new AsyncTask<Void, Void, Boolean>() {
 
@@ -340,14 +358,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             if (resultCode == RESULT_OK) {
                 Place place = PlacePicker.getPlace(data, this);
                 String address = place.getAddress().toString();
+                LatLng queriedLocation = place.getLatLng();
+                intialLocationLatitude_ = queriedLocation.latitude;
+                initialLocationLongitude_= queriedLocation.longitude;
+
 
                 if (requestCode == PLACE_PICKER_RESULT) {
                     placeAutocompleteFragment1.setText(address);
                     InitialAddress = address;
+                    intialLocationLatitude_ = queriedLocation.latitude;
+                    initialLocationLongitude_= queriedLocation.longitude;
                 }
                 else if (requestCode == PLACE_PICKER_RESULT_) {
                     placeAutocompleteFragment2.setText(address);
                     Destination = address;
+                    destinetionLatitude_ = queriedLocation.latitude;
+                    destinetionLongitude_ = queriedLocation.longitude;
                 }
             }
         }
@@ -485,11 +511,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
             if (addresses.size() > 0) {
-                String cityName = addresses.get(0).getAddressLine(0);
+                initialLocationLongitude_ =location.getLatitude();
+                initialLocationLongitude_ = location.getLongitude();
+                destinetionCityName_ =  addresses.get(0).getAddressLine(0);
                 String stateName = addresses.get(0).getAddressLine(1);
                 String countryName = addresses.get(0).getAddressLine(2);
                 InitialAddress = addresses.toString();
-                return stateName + " " + cityName + " " + countryName;
+                String result = "";
+                if(stateName != null)
+                    result+=stateName;
+                if(destinetionCityName_ != null)
+                    result += " "+destinetionCityName_;
+                if(countryName != null)
+                    result+= " "+ countryName;
+                return stateName + " " + destinetionCityName_ + " " + countryName;
             }
 
             return "";
@@ -501,6 +536,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return "";
     }
 
+
+    private void getCityName(double longitude, double latitude){
+        Geocoder gcd = new Geocoder(this, Locale.getDefault());
+        List<Address> addresses = null;
+        try {
+            addresses = gcd.getFromLocation(latitude, longitude, 1);
+            if (addresses.size() > 0) {
+               destinetionCityName_ = addresses.get(0).getLocality();
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
 
 
 
