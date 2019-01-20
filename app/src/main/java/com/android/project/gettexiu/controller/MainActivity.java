@@ -524,7 +524,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     result += " "+destinetionCityName_;
                 if(countryName != null)
                     result+= " "+ countryName;
-                return stateName + " " + destinetionCityName_ + " " + countryName;
+                return result;
             }
 
             return "";
