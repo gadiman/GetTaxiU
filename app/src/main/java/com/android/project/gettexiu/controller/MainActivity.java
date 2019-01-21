@@ -444,12 +444,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 if (!(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)) {
                     locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
                     criteria = new Criteria();
-                    bestProvider = String.valueOf(locationManager.getBestProvider(criteria, true)).toString();
+                    bestProvider = String.valueOf(locationManager.getBestProvider(criteria, true));
 
                     Location location = locationManager.getLastKnownLocation(bestProvider);
                     if (location != null) {
-                        // placeAutocompleteFragment1.setText(getPlace(location));//location.toString());
-                        //InitialAddress = getPlace(location);
                         return getPlace(location);
                     } else {
                         locationManager.requestLocationUpdates(bestProvider, 0, 0, locationListener);
