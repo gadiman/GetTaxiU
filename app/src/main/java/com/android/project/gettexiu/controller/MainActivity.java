@@ -450,7 +450,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     if (location != null) {
                         return getPlace(location);
                     } else {
-                        locationManager.requestLocationUpdates(bestProvider, 0, 0, locationListener);
+                        try {
+                            locationManager.requestLocationUpdates(bestProvider, 0, 0, locationListener);
+                        }catch (Exception ex){
+
+                        }
+
                         return "";
                     }
                 } else {
